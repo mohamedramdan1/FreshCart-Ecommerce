@@ -1,0 +1,16 @@
+@if (detailBrand) {
+  <section class="mx-auto w-75 bg-main-light rounded shadow p-4">
+    <h1 class="text-main text-center">Detils Brands</h1>
+  
+    <div class="row align-items-center justify-content-center">
+      <div class="col-md-4">
+        <img [src]="detailBrand.image" class="w-100 rounded" [alt]="detailBrand.name">
+      </div>
+      <div class="col-md-8">
+        <div>
+          <h3 class="h1 "> {{detailBrand.name}} </h3>
+        </div>
+      </div>
+    </div>
+  </section>
+}

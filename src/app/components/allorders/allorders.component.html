@@ -1,0 +1,58 @@
+@if (AllOrder.length) {
+<section class="bg-main-light rounded-4 shadow p-3 w-75 mx-auto">
+  <h1 class="text-center text-main mb-3">All Orders</h1>
+
+  @for (order of AllOrder ; track $index) {
+  <div class="row align-items-center border rounded my-2  p-2 allorder">
+    <h3 class="mb-3">Order: {{ $index + 1 }}</h3>
+    <div class="col-md-8">
+      @for (cartItem of order.cartItems; track $index) {
+      <div class="ps-5 mb-2">
+        <div class="d-flex align-items-center gap-3">
+          <img [src]="cartItem.product.imageCover" width="70px" class="cr" [alt]="cartItem.product.title">
+          <div class="info">
+            <h3 class="h6 small text-main"> {{cartItem.product.title | termtext :3}} </h3>
+            <p class="text-muted my-2">Count: <span
+                class="text-primary border border-primary p-1 rounded">{{cartItem.count}} </span></p>
+            <p class="text-muted m-0">Price: <span class="text-main">{{cartItem.price | currency :'EGP' }}</span> </p>
+          </div>
+        </div>
+        <hr class="border-danger border-2 mx-5" />
+      </div>
+      }
+    </div>
+
+    <div class="col-md-4">
+      <div class="border border-dark rounded p-1">
+        <p class="mb-0">
+          <span> Is Delivered: <span class="badge"
+              [class]="order.isDelivered ? 'bg-success' : 'bg-danger'">{{order.isDelivered ? 'Yes' :'No'}}</span>
+          </span>
+        </p>
+
+        <p class="mb-0">
+          <span> Is Paid: <span class="badge" [class]="order.isPaid ? 'bg-success' : 'bg-danger'">{{order.isPaid ? 'Yes'
+              :'No'}}</span> </span>
+        </p>
+
+        <span class="d-block"> PaymentMethod : <span class="badge bg-success">{{order.paymentMethodType}}</span></span>
+
+        <span class="d-block"> TotalOrderPrice : <span class="text-main">{{order.totalOrderPrice | currency:'EGP'}}</span> </span>
+
+        <span class="d-block"> Time Payment : <span class="text-primary">{{order.createdAt|date}}</span> </span>
+
+      </div>
+    </div>
+
+    <div class="col-12">
+      <hr class="allorder border-2 my-3 mx-5" />
+    </div>
+  </div>
+
+  }
+</section>
+}
+
+@else {
+<h1 class="text-center my-3 text-danger ">Your Orders Is Empty...</h1>
+}

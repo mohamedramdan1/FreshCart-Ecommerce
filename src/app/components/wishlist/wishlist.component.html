@@ -1,0 +1,38 @@
+@if (WishList.length) {
+  <section class="m-2">
+    <h1 class="text-main">Wish List:</h1>
+    <div class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
+      @for (product of WishList ; track product.id) {   
+      <div>
+        <div class="product p-2 position-relative">
+          <span (click)="removeProductWishlist(product.id)">
+            <i class="fas fa-heart p-2 heart" style="color: red;"></i>
+          </span>
+          <div [routerLink]="['/details',product.id]">
+            <img [src]="product.imageCover" class="w-100" [alt]="product.title">
+            <h3 class="small text-main"> {{product.category.name}} </h3>
+            <h4 class="h6"> {{product.title | termtext:2}} </h4>   
+            <div class="d-flex justify-content-between align-items-center">
+              <span> {{product.price | currency :'EGP'}} </span>
+              <div>
+                @for (item of [1,2,3,4,5].slice(0,product.ratingsAverage); track $index) {
+                <span><i class="fas fa-star rating-color"></i></span>
+                }
+                @if (product.ratingsAverage%1!==0) {
+                <i class="fa-solid fa-star-half-stroke rating-color"></i>
+                }
+                <span class="text-muted"> {{product.ratingsAverage}} </span>
+              </div>
+            </div>
+          </div>
+          <button class="btn-main w-100" (click)="addToCart(product.id)">+Add To Cart</button>
+        </div>
+      </div>
+      }
+    </div>
+  </section>
+}
+
+@else {
+  <h1 class="text-center text-danger">Your WhishList Is Empty......</h1>
+}

@@ -1,0 +1,23 @@
+@if (detailCategory) {
+  <section class="mx-auto w-75 bg-main-light rounded shadow p-4">
+    <h1 class="text-main text-center">Detils Category</h1>
+  
+    <div class="row align-items-center justify-content-center">
+      <div class="col-md-4">
+        <img [src]="detailCategory.image" class="w-100 rounded" [alt]="detailCategory.name">
+      </div>
+      <div class="col-md-8">
+        <div>
+          <h3 class="h1 "> {{detailCategory.name}} </h3>
+          <h4 class="h2 text-main my-3">Sub Categories:</h4>
+
+          @for (tab of SubCategoriesOnCat; track tab._id) {
+            <span class="badge bg-secondary me-3">
+              {{tab.name}}
+            </span>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+}

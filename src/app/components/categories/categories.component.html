@@ -1,0 +1,14 @@
+<section class="my-2">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 justify-content-center">
+    @for (cat of CategoriesList; track cat._id) {
+    <div class="col">
+      <div class=" card cr product" [routerLink]="['/CategoriesDetails',cat._id]">
+        <img [src]="cat.image" height="300px" class="w-100" [alt]="cat.name">
+        <div class="card-body">
+          <h3 class="h5 pt-2 text-center text-main"> {{cat.name}} </h3>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</section>

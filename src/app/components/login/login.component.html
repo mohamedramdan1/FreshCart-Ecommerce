@@ -1,0 +1,69 @@
+<section class="bg-main-light shadow rounded-4 p-2 my-4">
+  <h1 class="text-center text-main" style="font-size: 64px;">Login Now</h1>
+
+  <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+
+
+    <!-- email form control  -->
+    <div class="my-2">
+      <label for="email">email</label>
+      <input type="email" id="email" class="form-control" formControlName="email" [ngClass]="{
+        'is-valid':!loginForm.get('email')?.errors &&( loginForm.get('email')?.touched||loginForm.get('email')?.dirty),
+        'is-invalid':loginForm.get('email')?.errors &&( loginForm.get('email')?.touched||loginForm.get('email')?.dirty)
+      }">
+      @if (loginForm.get('email')?.errors &&( loginForm.get('email')?.touched||loginForm.get('email')?.dirty)) {
+      <div class="alert alert-danger w-50 ">
+          @if (loginForm.get('email')?.getError('required'))
+        {
+        <p class="m-0">Email Is Required </p>
+        }
+        @else if (loginForm.get('email')?.getError('email'))
+        {
+        <p class="m-0">Enter Valid Email</p>
+        }
+      </div>
+      }
+    </div>
+
+
+    <!-- password form control  -->
+    <div class="my-2">
+      <label for="password">password</label>
+      <input type="password" id="password" class="form-control" formControlName="password" [ngClass]="{
+        'is-valid': !loginForm.get('password')?.errors && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty),
+        'is-invalid': loginForm.get('password')?.errors && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)
+        }">
+      @if (loginForm.get('password')?.errors && (loginForm.get('password')?.touched||loginForm.get('password')?.dirty))
+      {
+      <div class="alert alert-danger w-50 ">
+        @if (loginForm.get('password')?.getError('required'))
+        {
+        <p class="m-0">Password Is Required </p>
+        }
+        @else if (loginForm.get('password')?.getError('pattern'))
+        {
+        <p class="m-0">Password must Be 6 to more any chars </p>
+        }
+      </div>
+      }
+    </div>
+
+
+    <div class="d-flex align-items-center justify-content-end gap-4">
+      <a routerLink="/forget"  class="link-primary fs-5">ForgetPassword...?</a>
+      <button [disabled]="loginForm.invalid || isLoading" type="submit" class="btn-main">Login
+        @if (isLoading) {
+        <span><i class="fas fa-spin fa-spinner"></i></span>
+        }
+      </button>
+    </div>
+
+    @if (msgError) {
+    <p class="alert alert-danger w-50 m-0">{{msgError}}</p>
+    }
+
+    @if(msgSucess){
+    <p class="btn-main m-0 w-50">Login Sucess Wait....</p>
+    }
+  </form>
+</section>
